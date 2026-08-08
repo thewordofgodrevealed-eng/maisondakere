@@ -16,3 +16,9 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
  targets.forEach(el=>observer.observe(el));
  hero?.addEventListener('pointermove',event=>{const x=(event.clientX/innerWidth-.5)*7,y=(event.clientY/innerHeight-.5)*5;hero.style.setProperty('--mouse-x',`${x}px`);hero.style.setProperty('--mouse-y',`${y}px`)});
 }
+// Small premium touches for the GitHub Pages version
+requestAnimationFrame(()=>document.body.classList.add('site-ready'));
+document.querySelectorAll('.room,.now article,.feature-list article').forEach(card=>{
+ card.addEventListener('pointermove',event=>{const r=card.getBoundingClientRect(),x=(event.clientX-r.left)/r.width-.5,y=(event.clientY-r.top)/r.height-.5;card.style.setProperty('--tilt-x',`${y*-2}deg`);card.style.setProperty('--tilt-y',`${x*2}deg`)});
+ card.addEventListener('pointerleave',()=>{card.style.removeProperty('--tilt-x');card.style.removeProperty('--tilt-y')});
+});
